@@ -41,35 +41,35 @@ const upload = multer({
     },
 });
 
-artPieceRouter.post(
-    '/create',
-    upload.array('images', 8),
-    async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            const { auth } = req as Request & { auth: { username: string; role: Role } };
-            const { username, role } = auth;
+// artPieceRouter.post(
+//     '/create',
+//     upload.array('images', 8),
+//     async (req: Request, res: Response, next: NextFunction) => {
+//         try {
+//             const { auth } = req as Request & { auth: { username: string; role: Role } };
+//             const { username, role } = auth;
 
-            // Get text data from request body
-            const artPieceInput = req.body;
+//             // Get text data from request body
+//             const artPieceInput = req.body;
 
-            // Get uploaded files
-            const files = req.files as Express.Multer.File[];
+//             // Get uploaded files
+//             const files = req.files as Express.Multer.File[];
 
-            // Pass both the art piece data and files to the service
-            const response = await ArtPieceService.registerArtPiece(
-                artPieceInput,
-                files,
-                username,
-                role
-            );
+//             // Pass both the art piece data and files to the service
+//             const response = await ArtPieceService.registerArtPiece(
+//                 artPieceInput,
+//                 files,
+//                 username,
+//                 role
+//             );
 
-            res.status(200).json(response);
-        } catch (error) {
-            // Clean up any uploaded files if there's an error
-            next(error);
-        }
-    }
-);
+//             res.status(200).json(response);
+//         } catch (error) {
+//             // Clean up any uploaded files if there's an error
+//             next(error);
+//         }
+//     }
+// );
 
 artPieceRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {

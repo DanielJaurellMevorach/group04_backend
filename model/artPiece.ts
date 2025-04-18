@@ -11,7 +11,7 @@ export class ArtPiece {
     readonly price: number;
     readonly tags: string[];
     readonly year: number;
-    readonly folderName?: string;
+    readonly url?: string;
     readonly likedBy?: User[];
     readonly inCart?: User[];
     readonly updatedAt?: Date;
@@ -27,7 +27,7 @@ export class ArtPiece {
         price: number;
         tags: string[];
         year: number;
-        folderName?: string;
+        url?: string;
         likedBy?: User[];
         inCart?: User[];
         updatedAt?: Date;
@@ -42,7 +42,7 @@ export class ArtPiece {
         this.price = artPiece.price;
         this.tags = artPiece.tags;
         this.year = artPiece.year;
-        this.folderName = artPiece.folderName;
+        this.url = artPiece.url;
         this.likedBy = artPiece.likedBy;
         this.inCart = artPiece.inCart;
         this.updatedAt = artPiece.updatedAt;
@@ -97,8 +97,8 @@ export class ArtPiece {
         return this.inCart;
     }
 
-    getFolderName(): string | undefined {
-        return this.folderName;
+    getUrl(): string | undefined {
+        return this.url;
     }
 
     getArtist(): string | undefined {
@@ -115,7 +115,7 @@ export class ArtPiece {
             price: artPiecePrisma.price,
             tags: artPiecePrisma.tags,
             year: artPiecePrisma.year,
-            folderName: `artPieces/${artPiecePrisma.folderName}`,
+            url: artPiecePrisma.url,
             updatedAt: artPiecePrisma.updatedAt,
             createdAt: artPiecePrisma.createdAt,
         });

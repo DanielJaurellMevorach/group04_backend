@@ -95,56 +95,56 @@ import path from 'path';
 //     }
 // };
 
-const createArtPiece = async ({
-    title,
-    description,
-    artist,
-    userId,
-    price,
-    tags,
-    year,
-}: {
-    title: string;
-    description: string;
-    artist: string;
-    userId: number;
-    price: number;
-    tags: string[];
-    year: number;
-}): Promise<ArtPiece> => {
-    try {
-        const newArtPiece = await database.artPiece.create({
-            data: {
-                title,
-                description,
-                artist,
-                userId,
-                price,
-                tags,
-                year,
-            },
-            include: { User: true },
-        });
+// const createArtPiece = async ({
+//     title,
+//     description,
+//     artist,
+//     userId,
+//     price,
+//     tags,
+//     year,
+// }: {
+//     title: string;
+//     description: string;
+//     artist: string;
+//     userId: number;
+//     price: number;
+//     tags: string[];
+//     year: number;
+// }): Promise<ArtPiece> => {
+//     try {
+//         const newArtPiece = await database.artPiece.create({
+//             data: {
+//                 title,
+//                 description,
+//                 artist,
+//                 userId,
+//                 price,
+//                 tags,
+//                 year,
+//             },
+//             include: { User: true },
+//         });
 
-        return new ArtPiece({
-            id: newArtPiece.id,
-            title: newArtPiece.title,
-            description: newArtPiece.description,
-            artist: newArtPiece.artist,
-            user: UserModel.from(newArtPiece.User),
-            userId: newArtPiece.userId,
-            price: newArtPiece.price,
-            folderName: newArtPiece.folderName,
-            tags: newArtPiece.tags,
-            year: newArtPiece.year,
-            updatedAt: newArtPiece.updatedAt,
-            createdAt: newArtPiece.createdAt,
-        });
-    } catch (error) {
-        console.error(error);
-        throw new Error('Database error. See server log for details.');
-    }
-};
+//         return new ArtPiece({
+//             id: newArtPiece.id,
+//             title: newArtPiece.title,
+//             description: newArtPiece.description,
+//             artist: newArtPiece.artist,
+//             user: UserModel.from(newArtPiece.User),
+//             userId: newArtPiece.userId,
+//             price: newArtPiece.price,
+//             url: newArtPiece.url,
+//             tags: newArtPiece.tags,
+//             year: newArtPiece.year,
+//             updatedAt: newArtPiece.updatedAt,
+//             createdAt: newArtPiece.createdAt,
+//         });
+//     } catch (error) {
+//         console.error(error);
+//         throw new Error('Database error. See server log for details.');
+//     }
+// };
 
 const getArtPieceImages = async (folderName: string): Promise<string[]> => {
     try {
@@ -210,7 +210,7 @@ const getArtPieceById = async ({ id }: { id: number }): Promise<ArtPiece | null>
 };
 
 const ArtPieceDb = {
-    createArtPiece,
+    // createArtPiece,
     getAllArtPieces,
     getArtPieceById,
     getArtPieceImages,

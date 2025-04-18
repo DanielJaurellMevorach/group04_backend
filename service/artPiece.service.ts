@@ -64,60 +64,60 @@ import userDb from '../repository/user.db';
 import path from 'path';
 import fs from 'fs/promises';
 
-const registerArtPiece = async (
-    { title, description, price, artist, tags, year }: ArtPieceInput,
-    files: Express.Multer.File[],
-    username: string,
-    role: string
-) => {
-    // Validate and get user ID
-    const user = await userDb.getUserByUsername({ username });
-    if (!user) throw new Error('User not found.');
+// const registerArtPiece = async (
+//     { title, description, price, artist, tags, year }: ArtPieceInput,
+//     files: Express.Multer.File[],
+//     username: string,
+//     role: string
+// ) => {
+//     // Validate and get user ID
+//     const user = await userDb.getUserByUsername({ username });
+//     if (!user) throw new Error('User not found.');
 
-    if (!title || !description || !user.getId() || !tags || !artist || !price || !year) {
-        throw new Error('All Art Piece fields are required.');
-    }
-    const userId = user.getId();
+//     if (!title || !description || !user.getId() || !tags || !artist || !price || !year) {
+//         throw new Error('All Art Piece fields are required.');
+//     }
+//     const userId = user.getId();
 
-    if (!userId) {
-        throw new Error('User ID is required.');
-    }
+//     if (!userId) {
+//         throw new Error('User ID is required.');
+//     }
 
-    const artPiece = await artPieceDb.createArtPiece({
-        title,
-        description,
-        artist,
-        userId,
-        price: parseFloat(price.toString()),
-        tags: Array.isArray(tags) ? tags : [tags],
-        year: parseInt(year.toString()),
-    });
+//     const artPiece = await artPieceDb.createArtPiece({
+//         title,
+//         description,
+//         artist,
+//         userId,
+//         price: parseFloat(price.toString()),
+//         tags: Array.isArray(tags) ? tags : [tags],
+//         year: parseInt(year.toString()),
+//     });
 
-    // Ensure folder exists (based on artPiece.id or similar logic)
-    const folderName = `${artPiece.getFolderName()}`; // Assuming folderName is generated from artPiece ID or similar
-    const folderPath = path.resolve(__dirname, '../artPieces', folderName);
-    await fs.mkdir(folderPath, { recursive: true });
+//     // Ensure folder exists (based on artPiece.id or similar logic)
+//     const folderName = `${artPiece.getFolderName()}`; // Assuming folderName is generated from artPiece ID or similar
+//     const folderPath = path.resolve(__dirname, '../artPieces', folderName);
+//     await fs.mkdir(folderPath, { recursive: true });
 
-    // Move files into the folder
-    const movedImages: string[] = [];
-    for (const file of files) {
-        const newFilePath = path.join(folderPath, file.originalname);
-        await fs.rename(file.path, newFilePath); // move temp upload
-        movedImages.push(file.originalname);
-    }
+//     // Move files into the folder
+//     const movedImages: string[] = [];
+//     for (const file of files) {
+//         const newFilePath = path.join(folderPath, file.originalname);
+//         await fs.rename(file.path, newFilePath); // move temp upload
+//         movedImages.push(file.originalname);
+//     }
 
-    return {
-        response: artPiece,
-        images: movedImages,
-    };
-};
+//     return {
+//         response: artPiece,
+//         images: movedImages,
+//     };
+// };
 
 const getAllArtPieces = async () => {
     return artPieceDb.getAllArtPieces();
 };
 
 const ArtPieceService = {
-    registerArtPiece,
+    // registerArtPiece,
     getAllArtPieces,
 };
 

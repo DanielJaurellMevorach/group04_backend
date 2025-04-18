@@ -30,7 +30,7 @@ model ArtPiece {
   price       Float
   tags        String[]
   year        Int
-  folderName  String   @default(dbgenerated("gen_random_uuid()"))
+  url         String   
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
   userId      Int
